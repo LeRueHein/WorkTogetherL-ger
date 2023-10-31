@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello RackController!{% endblock %}
+
+{% block body %}
+    <h1 class="text-center mt-3">Louer des baies</h1> <br>
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            {% for rack in pagination %}
+
+                <div class="card m-2" style="width: 18rem;">
+                    <div class="card-body">
+                        <h1 class="card-title bold">Baies n° {{ rack.id }}</h1>
+                            <h2><p class="fw-bold">Nombres de slots :</p>{{ rack.numberSlot }}</h2>
+                        <a href="/rack/{{ rack.id }}" class="btn btn-primary">Plus d'information</a>
+
+                    </div>
+                </div>
+
+            {% endfor %}
+            {{ knp_pagination_render(pagination) }}
+        </div>
+
+
+    </div>
+
+
+
+{% endblock %}

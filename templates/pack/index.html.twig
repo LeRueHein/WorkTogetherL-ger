@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PackController!{% endblock %}
+
+{% block body %}
+
+    <style>
+        .wrapper{
+            margin: 1em auto;
+            max-width: 800px;
+            width: 95%;
+            font: 18px/1.5 sans-serif;
+            text-align: center;
+        }
+        .card {
+            box-sizing: border-box;
+            width: 220px;
+            height: 254px;
+            background: black;
+            border: 1px solid white;
+            backdrop-filter: blur(6px);
+            border-radius: 17px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.5s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            user-select: none;
+            font-weight: bolder;
+            color: white;
+            margin: 10px;
+        }
+
+        .card:hover {
+            border: 1px solid purple;
+            transform: scale(1.05);
+        }
+
+        .card:active {
+            transform: scale(0.95) rotateZ(1.7deg);
+        }
+    </style>
+
+    <div class="container">
+        <div class="row">
+            <div class="wrapper">
+                <h1 class="mt-4">PACK D'OFFRES</h1><br>
+                <br>
+                <div class="">
+                    <table class="">
+                        <tbody class="d-flex flex-wrap align-content-center">
+                        {% for pack in pack %}
+                            <tr>
+                                <td>
+                                    <div class="card ms-6" style="width: 14rem; height: 14rem;">
+                                        <p>{{ pack.name }}</p>
+                                        <p>Prix : {{ pack.price }}€</p>
+                                        <p>Nombre slots: {{ pack.numberSlot }}</p>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

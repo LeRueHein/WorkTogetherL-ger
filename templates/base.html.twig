@@ -1,16 +1,105 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {% block stylesheets %}
-        {% endblock %}
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="icon"
+          href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
 
-        {% block javascripts %}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+</head>
+<body>
+
+{# navbar #}
+
+<header>
+    <nav class="navbar navbar-expand-lg  bg-dark ">
+        <a class="navbar-brand text-white" href="{{ path('app_home') }}">WorkToGether</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{{ path('app_rack') }}">Nos Baies</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{{ path('app_pack') }}">Nos Packs</a>
+                    </li>
+                {% if app.user == null %}
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{{ path('app_login') }}">Se connecter</a>
+                    </li>
+                {% endif %}
+
+                {% if app.user == null %}
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{{ path('app_register') }}">Créer un compte</a>
+                    </li>
+                {% endif %}
+
+                {% if app.user != null %}
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{{ path('app_info') }}">Mon compte</a>
+                    </li>
+                {% endif %}
+
+
+
+
+
+
+            </ul>
+        </div>
+    </nav>
+</header>
+
+
+<main>
+    {% block body %}
+    {% endblock %}
+</main>
+
+
+<footer class="bg-dark text-center text-white mt-auto footer fixed-bottom">
+    <!-- Grid container -->
+    <div class="container p-4 pb-0">
+        <!-- Section: Social media -->
+        <section class="mb-4">
+
+            <!-- Instagram -->
+            <a class="btn text-white btn-floating m-1" style="background-color: #ac2bac;" href="#!" role="button">
+                <i class="bi bi-instagram"></i>
+            </a>
+
+            <!-- Linkedin -->
+            <a class="btn text-white btn-floating m-1" style="background-color: #0082ca;" href="#!" role="button">
+                <i class="bi bi-telephone"></i>
+            </a>
+            <!-- Github -->
+            <a class="btn text-white btn-floating m-1" style="background-color: #333333;" href="#!" role="button">
+                <i class="bi bi-github"></i>
+            </a>
+        </section>
+        <!-- Section: Social media -->
+    </div>
+    <!-- Grid container -->
+
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2020 Copyright:
+        <a class="text-white" href="">WorkToGether.com</a>
+    </div>
+    <!-- Copyright -->
+</footer>
+</body>
+
 </html>

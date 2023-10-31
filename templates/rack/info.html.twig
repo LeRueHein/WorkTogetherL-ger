@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <body>
+
+    <div class="example-wrapper">
+        <h1 class="text-center">Information sur la baie</h1> <br>
+
+
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="" style="width: 18rem;">
+                    <div class="card-body">
+                        <ul>
+                            <li>
+                                <p>Numéro de la baie : {{ rack.id }}
+                                </p>
+                            </li>
+
+
+                            <li>
+                                <p>Nombre de slot : {{ rack.numberSlot }}
+                                </p>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+    </body>
+{%  endblock %}

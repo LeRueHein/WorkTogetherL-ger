@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello InfoController!{% endblock %}
+
+{% block body %}
+
+    <body>
+
+    <div class="example-wrapper">
+        <h1 class="text-center">Information sur vous</h1> <br>
+
+
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="" style="width: 18rem;">
+                    <div class="card-body">
+                        <ul>
+                            <li>
+                                <p>Prénom : {{ app.user.firstName }}</p>
+                            </li>
+                            <li>
+                                <p>Nom : {{ app.user.lastName }}</p>
+                            </li>
+                            <li>
+                                <p>Email : {{ app.user.email }}</p>
+                            </li>
+                            <li>
+                                <p>Date de Naissance : {{ app.user.birthday |date('d-m-Y')}}</p>
+                            </li>
+
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+    </body>
+
+{% endblock %}
