@@ -6,7 +6,7 @@
 
     <body>
 
-    <div class="example-wrapper">
+    <div class="container">
         <h1 class="text-center">Information sur vous</h1> <br>
 
 
@@ -25,16 +25,29 @@
                                 <p>Email : {{ app.user.email }}</p>
                             </li>
                             <li>
-                                <p>Date de Naissance : {{ app.user.birthday |date('d-m-Y')}}</p>
+                                <p>Date de Naissance : {{ app.user.birthday |date('d-m-Y') }}</p>
                             </li>
+                            <h1>Informations sur vos baies </h1>
+
+
+
+                            {% for reservation in reservations %}
+                                <div class="card">
+                                    <div class="card-body">
+                                    <p>Vos baies : {{ reservation.code }} </p>
+                                    <p>Le prix : {{ reservation.price }}€ </p>
+                                    <p>Nombre de slot : {{ reservation.pack.numberSlot }} </p>
+                                </div>
+                            {% endfor %}
+
 
 
                         </ul>
+
                     </div>
                 </div>
             </div>
         </div>
-
 
 
     </div>

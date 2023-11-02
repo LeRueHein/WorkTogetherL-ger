@@ -4,7 +4,7 @@
     <body>
 
     <div class="example-wrapper">
-        <h1 class="text-center">Information sur la baie</h1> <br>
+        <h1 class="text-center mt-4 text-primary">Information sur la baie</h1> <br>
 
 
         <div class="container">
@@ -12,25 +12,21 @@
                 <div class="" style="width: 18rem;">
                     <div class="card-body">
                         <ul>
-                            <li>
-                                <p>Numéro de la baie : {{ rack.id }}
-                                </p>
-                            </li>
-
-
-                            <li>
-                                <p>Nombre de slot : {{ rack.numberSlot }}
-                                </p>
-                            </li>
-
+                            <u><h1 class="card-title bold text-center">Baies n°{{ rack.id }}</h1></u>
+                            <p class="fw-bold mt-4 text-center">Nombres de slots disponibles</p>
+                            <p class="text-center fw-bold lead">{{ rack.numberSlot }}</p>
+                            <div class="text-center">
+                                <a href="{{ path('app_pack') }}" class="btn btn-primary">Plus d'information</a>
+                            </div>
                         </ul>
+
+
                     </div>
                 </div>
             </div>
         </div>
 
 
-
     </div>
     </body>
-{%  endblock %}
+{% endblock %}

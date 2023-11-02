@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Rack;
+use App\Entity\Reservation;
+use App\Entity\Unit;
 use Doctrine\ORM\EntityManagerInterface;
 
 use Knp\Component\Pager\PaginatorInterface;
@@ -20,7 +22,7 @@ class RackController extends AbstractController
         $pagination = $paginator->paginate(
             $entityManager->getRepository(Rack::class)->paginationQuery(),
             $request->query->get('page', 1),
-            5
+            8
         );
 
 
@@ -30,10 +32,16 @@ class RackController extends AbstractController
     }
 
     #[Route('/rack/{id}', name: 'app_rack_information')]
-    public function rack(EntityManagerInterface $entityManager, INT $id): Response
+    public function rack(EntityManagerInterface $entityManager, int $id): Response
     {
 
         $rack = $entityManager->getRepository(Rack::class)->find($id);
+        $unit = $entityManager->getRepository(Unit::class)->find($id);
+        $reservations = $entityManager->getRepository(Reservation::class)->find($id);
+        $reservations ->getUnits();
+
+
+
 
 
         return $this->render('rack/info.html.twig', [

@@ -8,11 +8,15 @@
         <div class="row justify-content-center">
             {% for rack in pagination %}
 
-                <div class="card m-2" style="width: 18rem;">
+                <div class="card m-2 bg-light" style="width: 18rem;">
                     <div class="card-body">
-                        <h1 class="card-title bold">Baies n° {{ rack.id }}</h1>
-                            <h2><p class="fw-bold">Nombres de slots :</p>{{ rack.numberSlot }}</h2>
-                        <a href="/rack/{{ rack.id }}" class="btn btn-primary">Plus d'information</a>
+                        <u><h1 class="card-title bold text-center">Baies n°{{ rack.id }}</h1></u>
+                        <p class="fw-bold">Nombres de slots disponibles</p>
+                        <p class="text-center fw-bold">{{ rack.numberSlot }}</p>
+                        <div class="text-center">
+                            <a href="/rack/{{ rack.id }}" class="btn btn-primary">Plus d'information</a>
+                        </div>
+
 
                     </div>
                 </div>
