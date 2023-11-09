@@ -4,7 +4,7 @@
     <body>
 
     <div class="example-wrapper">
-        <h1 class="text-center mt-4 text-primary">Information sur la baie</h1> <br>
+        <h1 class="text-center mt-3 ">Information sur la baie</h1> <br>
 
 
         <div class="container">
@@ -15,9 +15,33 @@
                             <u><h1 class="card-title bold text-center">Baies n°{{ rack.id }}</h1></u>
                             <p class="fw-bold mt-4 text-center">Nombres de slots disponibles</p>
                             <p class="text-center fw-bold lead">{{ rack.numberSlot }}</p>
-                            <div class="text-center">
-                                <a href="{{ path('app_pack') }}" class="btn btn-primary">Plus d'information</a>
-                            </div>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Numéro de l'unité</th>
+                                    <th scope="col">Statut</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for unit in units %}
+                                <tr>
+                                    <th scope="row">{{ unit.id }}</th>
+                                    <td><input class="form-check form-switch form-check-input border-black" type="checkbox" disabled {% if (unit.state) %} checked {% endif %}>
+
+
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                {% endfor %}
+
+
+                            </table>
+                            {% if app.user != null %}
+                                <div class="text-center">
+                                    <a href="{{ path('app_pack') }}" class="btn btn-primary">Plus d'information</a>
+                                </div>
+                            {% endif %}
                         </ul>
 
 

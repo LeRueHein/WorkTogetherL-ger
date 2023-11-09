@@ -18,11 +18,11 @@ class PackController extends AbstractController
     public function index(EntityManagerInterface $entityManager): Response
     {
 
-        $pack = $entityManager->getRepository(Pack::class)->findAll();
+        $packs = $entityManager->getRepository(Pack::class)->findAll();
 
         return $this->render('pack/index.html.twig', [
             'controller_name' => 'PackController',
-            'pack' => $pack
+            'packs' => $packs
 
         ]);
     }
@@ -30,7 +30,6 @@ class PackController extends AbstractController
     #[Route('/Reservationpack/{id}', name: 'app_reservation_pack')]
     public function new(EntityManagerInterface $entityManager, Request $request, $id): Response
     {
-
 
         $reservation = new Reservation();
 

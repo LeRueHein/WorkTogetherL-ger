@@ -7,6 +7,5 @@
 
 // any CSS you import will output into a single css file (app.scss in this case)
 import './styles/app.scss';
-import "./scripts/script.js"
 import 'bootstrap/dist/js/bootstrap.min'
 import './styles/style.scss';

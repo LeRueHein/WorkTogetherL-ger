@@ -36,17 +36,12 @@ class RackController extends AbstractController
     {
 
         $rack = $entityManager->getRepository(Rack::class)->find($id);
-        $unit = $entityManager->getRepository(Unit::class)->find($id);
-        $reservations = $entityManager->getRepository(Reservation::class)->find($id);
-        $reservations ->getUnits();
-
-
-
-
+        $units = $entityManager->getRepository(Unit::class)->findby(array('rack'=>$rack));
 
         return $this->render('rack/info.html.twig', [
             'controller_name' => 'RackController',
-            'rack' => $rack
+            'rack' => $rack,
+            'units' => $units
         ]);
     }
 }

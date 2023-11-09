@@ -46,28 +46,68 @@
     <div class="container">
         <div class="row">
             <div class="wrapper">
-                <h1 class="mt-4">PACK D'OFFRES</h1><br>
+                <h1 class="mt-3 fw-bold text-center">Packs d'offres</h1><br>
                 <br>
-                <div class="">
                     <table class="">
-                        <tbody class="d-flex flex-wrap align-content-center">
-                        {% for pack in pack %}
+                        <tbody class="d-flex flex-wrap justify-content-center">
+
+                        {% for pack in packs %}
+
                             <tr>
                                 <td>
-                                    <div class="card ms-6" style="width: 14rem; height: 14rem;">
+                                    <div class="card ms-6" style="width: 15rem; height: 15rem;">
                                         <p>{{ pack.name }}</p>
                                         <p>Prix : {{ pack.price }}€</p>
                                         <p>Nombre slots: {{ pack.numberSlot }}</p>
-                                        <a href="/Reservationpack/{{ pack.id }}" onclick="return confirm('Etes-vous sur de vouloir acheter cela ?')" class="btn btn-primary">Achetez</a>
+                                        {% if app.user != null %}
+
+
+                                            <!-- Button trigger modal -->
+                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                                    data-bs-target="#staticBackdrop" onclick="showModal({{ pack.id }})">
+                                                Achetez
+                                            </button>
+
+
+
+                                        {% endif %}
                                     </div>
                                 </td>
                             </tr>
+
+
                         {% endfor %}
                         </tbody>
                     </table>
+
+                <!-- Modal -->
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
+                     data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                     aria-hidden="true" id="myModal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Confirmation</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Etes-vous sur de vouloir achetez ce pack ?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                    Fermer
+                                </button>
+                                <a href="/Reservationpack/1"
+                                   class="btn btn-primary" id="packButton">Enregistrer</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script src="/script.js"></script>
 
 {% endblock %}

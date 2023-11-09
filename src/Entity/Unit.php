@@ -27,6 +27,9 @@ class Unit
     #[ORM\ManyToOne(inversedBy: 'units')]
     private ?Reservation $reservation = null;
 
+    #[ORM\Column]
+    private ?bool $state = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -76,6 +79,18 @@ class Unit
     public function setReservation(?Reservation $reservation): static
     {
         $this->reservation = $reservation;
+
+        return $this;
+    }
+
+    public function isState(): ?bool
+    {
+        return $this->state;
+    }
+
+    public function setState(bool $state): static
+    {
+        $this->state = $state;
 
         return $this;
     }

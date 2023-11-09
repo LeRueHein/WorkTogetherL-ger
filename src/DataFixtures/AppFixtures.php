@@ -12,6 +12,7 @@ use App\Entity\User;
 use App\Repository\TypeReservationRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use phpDocumentor\Reflection\Types\True_;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 
@@ -95,6 +96,8 @@ class AppFixtures extends Fixture
             $manager->flush();
 
         }
+
+
         // Création des types d'unités dans une boucle
 
         $typeunit = new TypeUnit();
@@ -115,10 +118,25 @@ class AppFixtures extends Fixture
         $manager->persist($typeunit);
         $manager->flush();
 
+        //creation unit
+        $racks = $manager->getRepository(Rack::class)->findAll();
+        $typeunit = $manager->getRepository(TypeUnit::class)->findAll();
+        foreach ($racks as $rack) {
+            for ($i = 1; $i <= $rack->getNumberSlot(); $i++) {
+                $unit = new Unit();
+                $unit->setLocationSlot($i);
+                $unit->setTypeUnit($typeunit[random_int(0, count($typeunit) - 1)]);
+                $unit->setRack($rack);
+                $unit->setState(false);
+                $unit->setReservation(null);
+                $manager->persist($unit);
+            }
 
-        // Création des types de réservation dans une boucle
+
+            // Création des types de réservation dans une boucle
 
 
+        }
         $typereservation = new TypeReservation();
         $typereservation->setName('Mensuel');
         $typereservation->setPercentage(0);
@@ -147,29 +165,21 @@ class AppFixtures extends Fixture
             $startEnd = new \DateTime();
             $startEnd->setTimestamp(mt_rand(strtotime('2000-12-31'), strtotime('2020-01-01'),));
             $reservation->setEndDate($startEnd);
-            $reservation->setPrice(rand(1000, 100000));
-            $reservation->setPercentage((rand(1, 100)));
+
             $reservation->setTypeReservation($typereservation[random_int(0, count($typereservation) - 1)]);
             $reservation->setUser($user[random_int(0, count($user) - 1)]);
             $reservation->setPack($pack[random_int(0, count($pack) - 1)]);
+
+            $reservation->setPrice($reservation->getPack()->getPrice());
+            $reservation->setPercentage($reservation->getTypeReservation()->getPercentage());
             $manager->persist($reservation);
             $manager->flush();
-
-        }
-        $rack = $manager->getRepository(Rack::class)->findAll();
-        $reservation = $manager->getRepository(Reservation::class)->findAll();
-        $typeunit = $manager->getRepository(TypeUnit::class)->findAll();
-        for ($i = 1; $i <= 10; $i++) {
-            $unit = new Unit();
-            $unit->setLocationSlot(rand(1, 42));
-            $unit->setTypeUnit($typeunit[random_int(0, count($typeunit) - 1)]);
-            $unit->setRack($rack[random_int(0, count($rack) - 1)]);
-            $unit->setReservation($reservation[random_int(0, count($reservation) - 1)]);
-
-            $manager->persist($unit);
-            $manager->flush();
-
-
+            $units = $manager->getRepository(Unit::class)->findBy(array('reservation' => null));
+            for($j = 0 ; $j < $reservation->getPack()->getNumberSlot(); $j++){
+                $units[$j]->setReservation($reservation);
+                $units[$j]->setState(true);
+                $manager->flush();
+            }
         }
     }
 }

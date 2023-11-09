@@ -21,7 +21,6 @@ class Rack
     #[ORM\OneToMany(mappedBy: 'rack', targetEntity: Unit::class)]
     private Collection $units;
 
-
     public function __construct()
     {
         $this->units = new ArrayCollection();
@@ -73,5 +72,4 @@ class Rack
 
         return $this;
     }
-
 }

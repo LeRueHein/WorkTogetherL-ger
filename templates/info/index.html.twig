@@ -4,53 +4,45 @@
 
 {% block body %}
 
+
+
     <body>
-
-    <div class="container">
-        <h1 class="text-center">Information sur vous</h1> <br>
-
-
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="" style="width: 18rem;">
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-6">
+                <div class="card">
                     <div class="card-body">
-                        <ul>
-                            <li>
-                                <p>Prénom : {{ app.user.firstName }}</p>
-                            </li>
-                            <li>
-                                <p>Nom : {{ app.user.lastName }}</p>
-                            </li>
-                            <li>
-                                <p>Email : {{ app.user.email }}</p>
-                            </li>
-                            <li>
-                                <p>Date de Naissance : {{ app.user.birthday |date('d-m-Y') }}</p>
-                            </li>
-                            <h1>Informations sur vos baies </h1>
-
-
-
-                            {% for reservation in reservations %}
-                                <div class="card">
-                                    <div class="card-body">
-                                    <p>Vos baies : {{ reservation.code }} </p>
-                                    <p>Le prix : {{ reservation.price }}€ </p>
-                                    <p>Nombre de slot : {{ reservation.pack.numberSlot }} </p>
-                                </div>
-                            {% endfor %}
-
-
-
+                        <h5 class="card-title">Informations Utilisateur</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Prénom : {{ app.user.firstName }}</li>
+                            <li class="list-group-item">Nom : {{ app.user.lastName }}</li>
+                            <li class="list-group-item">Email : {{ app.user.email }}</li>
+                            <li class="list-group-item">Date de Naissance : {{ app.user.birthday |date('d-m-Y') }}</li>
                         </ul>
-
                     </div>
                 </div>
             </div>
+            <div class="col-6">
+                <h5>Réservations</h5>
+                {% for reservation in reservations %}
+                    <div class="card mb-1 container">
+                        <div class="row">
+                            <p class="text-center fw-bold">N° reservation</p>
+                            <p class="text-center">{{ reservation.code }}</p>
+                            <p>Prix : {{ reservation.price }}€</p>
+                            <p>Nombre de slot : {{ reservation.pack.numberSlot }}</p>
+                            <p>Date de début : {{ reservation.Startdate|date('d-m-y') }}</p>
+                            <p>Date de début : {{ reservation.Enddate|date('d-m-y') }}</p>
+{#                            <p>Temps restant : {% set difference = date(action.Startdate) | (action.Enddate) %}</p>#}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
-
-
     </div>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0/js/bootstrap.min.js"></script>
     </body>
+
 
 {% endblock %}
